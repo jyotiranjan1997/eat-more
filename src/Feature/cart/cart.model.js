@@ -26,10 +26,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       min: 1,
     },
-  },
-  {
-    versionKey: false,
-    timestamps: true,
   }
 );
 
