@@ -3,12 +3,12 @@ var jwt = require("jsonwebtoken");
 
 const CartMiddleWare = (req, res, next) => {
 
-    const token = req.headers.Authroization;
+    const token = req.headers.authorization;
     if (token) {
         req.body.user = token;
         next()
     } else {
-        req.status(500).send({msg:"You are Not authrized"})
+        res.status(500).send({msg:"You are Not authrized"})
    }
 
 

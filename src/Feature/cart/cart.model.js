@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  cata:[],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
