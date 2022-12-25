@@ -12,11 +12,7 @@ app.post("/login", async (req, res) => {
     let user = await User.findOne({ mobile });
 
     if (user) {
-      var token = jwt.sign({ id: user.id }, secret_key);
-
-      res.send({
-        token: token,
-      });
+     res.send({token:user._id})
     }
   } catch (e) {
     res.status(404).send(e.message);
