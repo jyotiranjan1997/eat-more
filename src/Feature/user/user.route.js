@@ -12,20 +12,21 @@ app.post("/login", async (req, res) => {
     let user = await User.findOne({ mobile });
 
     if (user) {
-     res.send({token:user._id})
+      var token = jwt.sign({ user }, secret_key);
+     res.status(200).send({token})
+    } else {
+      res.status(200).send("user Not present !")
     }
   } catch (e) {
     res.status(404).send(e.message);
   }
 });
 
-app.post("/singleuser",CartMiddleWare, async (req, res) => {
-  const  id  = req.body.user;
+app.get("/singleuser",CartMiddleWare, async (req, res) => {
+  const { user } = req.body;
   try {
-    let user = await User.findOne({ id });
-
     if (user) {
-      res.send({user:user})
+      res.status(200).send({user})
     }
   } catch (e) {
     res.status(404).send(e.message);

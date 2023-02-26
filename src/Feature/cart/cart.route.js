@@ -2,9 +2,9 @@ const express = require("express");
 const Cart = require("./cart.model");
 const app = express.Router();
 
-const { CartMiddleWare } = require("../../MiddleWare/CartMiddleWare");
+const { CartMiddleWare2 } = require("../../MiddleWare/CartMiddleWare");
 
-app.post("/add", CartMiddleWare, async (req, res) => {
+app.post("/add", CartMiddleWare2, async (req, res) => {
   let payload = req.body;
   try {
     await Cart.create(payload);
@@ -13,18 +13,18 @@ app.post("/add", CartMiddleWare, async (req, res) => {
     res.status(400).send(e.message);
   }
 });
-app.get("/", CartMiddleWare, async (req, res) => {
-  let payload = req.body;
-console.log(payload)
+
+app.get("/", CartMiddleWare2, async (req, res) => {
+  let {user} = req.body;
   try {
-    let Items = await Cart.find({ user: payload.user});
+    let Items = await Cart.find({ user});
     res.send({ msg: "success", Items: Items });
   } catch (e) {
     res.status(400).send(e.message);
   }
 });
 
-app.patch("/:cartId", CartMiddleWare, async (req, res) => {
+app.patch("/:cartId", CartMiddleWare2, async (req, res) => {
   const id = req.params.cartId;
   const { quantity } = req.body;
   try {
@@ -38,7 +38,7 @@ app.patch("/:cartId", CartMiddleWare, async (req, res) => {
   }
 });
 
-app.delete("/:cartId", CartMiddleWare, async (req, res) => {
+app.delete("/:cartId", CartMiddleWare2, async (req, res) => {
   
   const id = req.params.cartId;
   if (id === "deleteall") {
