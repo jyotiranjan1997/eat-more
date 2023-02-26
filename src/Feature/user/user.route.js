@@ -47,7 +47,10 @@ app.post("/signup", async (req, res) => {
       mobile,
     });
 
-    res.send({ token: `${user.id}` });
+    if (user) {
+      var token = jwt.sign({ user }, secret_key);
+      res.status(200).send({ token });
+    }
     // }
   } catch (e) {
     res.status(404).send(e.message);
