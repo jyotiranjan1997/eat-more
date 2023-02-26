@@ -15,13 +15,13 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  cata:[],
+  cata: [],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
     required: true,
   },
-  quantity: {
+  qty: {
     type: Number,
     default: 1,
   },
