@@ -26,12 +26,9 @@ app.get("/", CartMiddleWare2, async (req, res) => {
 
 app.patch("/:cartId", CartMiddleWare2, async (req, res) => {
   const id = req.params.cartId;
-  const { quantity } = req.body;
+  const { qty } = req.body;
   try {
-    const updatedCart = await Cart.findByIdAndUpdate(
-      { _id: id },
-      { quantity: quantity }
-    );
+    const updatedCart = await Cart.findByIdAndUpdate({ _id: id }, { qty });
     res.status(200).json({msg:"update Successfully"});
   } catch (error) {
     res.status(500).json(error);
